@@ -7,8 +7,13 @@ createPlaylist = async (req, res) => {
 };
 
 getPlaylists = async (req, res) => {
-  const result = await Playlist.findById({});
-  res.send(result);
+  const uid=req.query.userId;
+  if(uid){
+    console.log(uid)
+    const result = await Playlist.find({user:uid});
+    return res.send(result);
+  }
+  res.sendStatus(404);
 };
 
 getPlaylist = async (req, res) => {
