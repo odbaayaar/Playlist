@@ -7,10 +7,10 @@ createPlaylist = async (req, res) => {
 };
 
 getPlaylists = async (req, res) => {
-  const uid=req.query.userId;
-  if(uid){
+  const uid = req.query.userId;
+  if (uid) {
     console.log(uid)
-    const result = await Playlist.find({user:uid});
+    const result = await Playlist.find({ user: uid });
     return res.send(result);
   }
   res.sendStatus(404);
@@ -26,4 +26,12 @@ getPlaylist = async (req, res) => {
   res.send(result);
 };
 
-module.exports = { createPlaylist, getPlaylists, getPlaylist };
+addToPlaylist = async (req, res) => {
+  const data = req.body
+  const result = await Playlist.findByIdAndUpdate(req.params.id,data);
+  res.sendStatus(200)
+
+}
+
+
+module.exports = { createPlaylist, getPlaylists, getPlaylist, addToPlaylist };
